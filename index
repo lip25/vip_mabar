@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VIP Mabar MLBB</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:#08090d;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+.container{
+    width:94%;
+    max-width:700px;
+    margin:auto;
+    padding-bottom:40px;
+}
+
+header{
+    padding:25px 0;
+}
+
+h1{
+    margin:0;
+    font-size:20px;
+}
+
+.subtitle{
+    color:#888;
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* SETTING */
+
+.card{
+    background:#11131a;
+    border:1px solid #292d38;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:12px;
+}
+
+label{
+    display:block;
+    color:#aaa;
+    font-size:11px;
+    margin-bottom:6px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #292d38;
+    background:#08090d;
+    color:white;
+    outline:none;
+    font-size:14px;
+}
+
+input:focus{
+    border-color:#8b5cf6;
+}
+
+/* STATS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+    margin-bottom:12px;
+}
+
+.stat{
+    background:#11131a;
+    border:1px solid #292d38;
+    border-radius:14px;
+    padding:13px 8px;
+}
+
+.stat-title{
+    color:#777;
+    font-size:9px;
+}
+
+.stat-value{
+    font-size:18px;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+/* BUTTON */
+
+button{
+    cursor:pointer;
+}
+
+.add-main{
+    width:100%;
+    border:0;
+    border-radius:13px;
+    padding:14px;
+    background:#7c3aed;
+    color:white;
+    font-weight:bold;
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.add-main:active{
+    transform:scale(.98);
+}
+
+/* FORM */
+
+.form{
+    display:none;
+}
+
+.form.active{
+    display:block;
+}
+
+.form-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:15px;
+}
+
+.form-title h2{
+    margin:0;
+    font-size:15px;
+}
+
+.close{
+    width:30px;
+    height:30px;
+    border:1px solid #333;
+    border-radius:8px;
+    background:#181b24;
+    color:#aaa;
+    font-size:18px;
+}
+
+.field{
+    margin-bottom:12px;
+}
+
+.preview{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-bottom:12px;
+}
+
+.preview-box{
+    background:#18131f;
+    border:1px solid #35264d;
+    border-radius:10px;
+    padding:11px;
+}
+
+.preview-label{
+    color:#888;
+    font-size:9px;
+}
+
+.preview-value{
+    color:#c4b5fd;
+    font-weight:bold;
+    margin-top:4px;
+}
+
+.form-buttons{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.save{
+    border:0;
+    border-radius:10px;
+    background:#7c3aed;
+    color:white;
+    padding:12px;
+    font-weight:bold;
+}
+
+.cancel{
+    border:1px solid #292d38;
+    border-radius:10px;
+    background:#181b24;
+    color:#aaa;
+    padding:12px;
+}
+
+/* PARTICIPANT */
+
+.section{
+    margin-top:18px;
+    margin-bottom:10px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.participant{
+    background:#11131a;
+    border:1px solid #292d38;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:9px;
+}
+
+.participant.done{
+    opacity:.55;
+}
+
+.participant-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.name{
+    font-size:14px;
+    font-weight:bold;
+    word-break:break-word;
+}
+
+.ml-id{
+    color:#888;
+    font-size:10px;
+    margin-top:4px;
+}
+
+.donate{
+    color:#bfa7ff;
+    font-size:11px;
+    margin-top:8px;
+}
+
+.games{
+    text-align:right;
+}
+
+.game-number{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.game-label{
+    color:#777;
+    font-size:9px;
+}
+
+.done-text{
+    color:#4ade80;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.controls{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:6px;
+    margin-top:13px;
+}
+
+.control{
+    padding:9px 5px;
+    border-radius:8px;
+    border:1px solid #292d38;
+    background:#181b24;
+    color:#ddd;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.minus{
+    color:#fca5a5;
+}
+
+.plus{
+    color:#86efac;
+}
+
+.delete{
+    color:#fca5a5;
+}
+
+.reset{
+    width:100%;
+    margin-top:15px;
+    padding:11px;
+    background:none;
+    border:1px solid #292d38;
+    border-radius:10px;
+    color:#666;
+    font-size:10px;
+}
+
+.empty{
+    text-align:center;
+    padding:30px;
+    border:1px dashed #292d38;
+    border-radius:15px;
+    color:#666;
+    font-size:12px;
+}
+
+@media(max-width:500px){
+
+    .stats{
+        gap:5px;
+    }
+
+    .stat-value{
+        font-size:16px;
+    }
+
+    .controls{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .delete{
+        grid-column:1/3;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+    <h1>⚡ VIP Mabar MLBB</h1>
+    <div class="subtitle">Dashboard Peserta</div>
+</header>
+
+
+<!-- HARGA VIP -->
+
+<div class="card">
+
+    <label>HARGA VIP PER GAME</label>
+
+    <input
+        type="number"
+        id="hargaVIP"
+        value="5000"
+        min="1"
+    >
+
+</div>
+
+
+<!-- STATISTIK -->
+
+<div class="stats">
+
+    <div class="stat">
+        <div class="stat-title">PESERTA</div>
+        <div class="stat-value" id="jumlahPeserta">0</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">GAME TERSISA</div>
+        <div class="stat-value" id="jumlahGame">0</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-title">TOTAL DONATE</div>
+        <div class="stat-value" id="totalDonate">Rp0</div>
+    </div>
+
+</div>
+
+
+<!-- TOMBOL TAMBAH -->
+
+<button
+    type="button"
+    class="add-main"
+    id="tombolTambah"
+>
+    + TAMBAH PESERTA
+</button>
+
+
+<!-- FORM -->
+
+<div
+    class="card form"
+    id="formPeserta"
+>
+
+    <div class="form-title">
+
+        <h2>Tambah Peserta</h2>
+
+        <button
+            type="button"
+            class="close"
+            id="tombolTutup"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div class="field">
+
+        <label>NAMA / ID DONATE</label>
+
+        <input
+            type="text"
+            id="nama"
+            placeholder="Contoh: Alif"
+        >
+
+    </div>
+
+
+    <div class="field">
+
+        <label>ID MOBILE LEGENDS</label>
+
+        <input
+            type="text"
+            id="mlid"
+            placeholder="Opsional"
+        >
+
+    </div>
+
+
+    <div class="field">
+
+        <label>JUMLAH DONATE</label>
+
+        <input
+            type="number"
+            id="donate"
+            placeholder="Contoh: 25000"
+            min="1"
+        >
+
+    </div>
+
+
+    <!-- PREVIEW -->
+
+    <div class="preview">
+
+        <div class="preview-box">
+
+            <div class="preview-label">
+                DONATE
+            </div>
+
+            <div
+                class="preview-value"
+                id="previewDonate"
+            >
+                Rp0
+            </div>
+
+        </div>
+
+
+        <div class="preview-box">
+
+            <div class="preview-label">
+                MENDAPAT
+            </div>
+
+            <div
+                class="preview-value"
+                id="previewGame"
+            >
+                0 Game
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="form-buttons">
+
+        <button
+            type="button"
+            class="cancel"
+            id="tombolBatal"
+        >
+            BATAL
+        </button>
+
+        <button
+            type="button"
+            class="save"
+            id="tombolSimpan"
+        >
+            TAMBAH
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- DAFTAR -->
+
+<div class="section">
+    DAFTAR PESERTA
+</div>
+
+<div id="daftarPeserta">
+
+    <div class="empty">
+        Belum ada peserta.
+    </div>
+
+</div>
+
+
+<button
+    type="button"
+    class="reset"
+    id="resetData"
+>
+    RESET SEMUA DATA
+</button>
+
+</div>
+
+
+<script>
+
+let peserta = [];
+
+let hargaVIP = 5000;
+
+
+/* =========================
+   AMBIL ELEMENT
+========================= */
+
+const tombolTambah = document.getElementById("tombolTambah");
+const tombolTutup = document.getElementById("tombolTutup");
+const tombolBatal = document.getElementById("tombolBatal");
+const tombolSimpan = document.getElementById("tombolSimpan");
+
+const formPeserta = document.getElementById("formPeserta");
+
+const nama = document.getElementById("nama");
+const mlid = document.getElementById("mlid");
+const donate = document.getElementById("donate");
+
+const hargaInput = document.getElementById("hargaVIP");
+
+const previewDonate = document.getElementById("previewDonate");
+const previewGame = document.getElementById("previewGame");
+
+const daftarPeserta = document.getElementById("daftarPeserta");
+
+
+/* =========================
+   FORMAT RUPIAH
+========================= */
+
+function rupiah(angka){
+
+    return "Rp" + Number(angka).toLocaleString("id-ID");
+
+}
+
+
+/* =========================
+   HITUNG GAME
+========================= */
+
+function hitungGame(){
+
+    const jumlahDonate = Number(donate.value) || 0;
+
+    const harga = Number(hargaInput.value) || 5000;
+
+    if(jumlahDonate <= 0){
+        previewDonate.innerText = "Rp0";
+        previewGame.innerText = "0 Game";
+        return;
+    }
+
+    const game = Math.floor(jumlahDonate / harga);
+
+    previewDonate.innerText = rupiah(jumlahDonate);
+
+    previewGame.innerText = game + " Game";
+
+}
+
+
+/* =========================
+   BUKA FORM
+========================= */
+
+tombolTambah.addEventListener("click", function(){
+
+    formPeserta.classList.add("active");
+
+    nama.focus();
+
+});
+
+
+/* =========================
+   TUTUP FORM
+========================= */
+
+function tutupForm(){
+
+    formPeserta.classList.remove("active");
+
+    nama.value = "";
+    mlid.value = "";
+    donate.value = "";
+
+    hitungGame();
+
+}
+
+
+tombolTutup.addEventListener("click", tutupForm);
+
+tombolBatal.addEventListener("click", tutupForm);
+
+
+/* =========================
+   PREVIEW
+========================= */
+
+donate.addEventListener("input", hitungGame);
+
+hargaInput.addEventListener("input", function(){
+
+    hargaVIP = Number(hargaInput.value) || 5000;
+
+    localStorage.setItem(
+        "vipHarga",
+        hargaVIP
+    );
+
+    hitungGame();
+
+});
+
+
+/* =========================
+   TAMBAH PESERTA
+========================= */
+
+tombolSimpan.addEventListener("click", function(){
+
+    const namaPeserta = nama.value.trim();
+
+    const idML = mlid.value.trim();
+
+    const jumlahDonate = Number(donate.value);
+
+    const harga = Number(hargaInput.value) || 5000;
+
+    const jumlahGame = Math.floor(
+        jumlahDonate / harga
+    );
+
+
+    /* CEK NAMA */
+
+    if(namaPeserta === ""){
+
+        alert("Masukkan nama atau ID donate.");
+
+        nama.focus();
+
+        return;
+
+    }
+
+
+    /* CEK DONATE */
+
+    if(
+        !Number.isFinite(jumlahDonate) ||
+        jumlahDonate <= 0
+    ){
+
+        alert("Masukkan jumlah donate.");
+
+        donate.focus();
+
+        return;
+
+    }
+
+
+    /* CEK GAME */
+
+    if(jumlahGame < 1){
+
+        alert(
+            "Donate belum cukup untuk 1 game.\n\n" +
+            "Harga VIP: " +
+            rupiah(harga)
+        );
+
+        return;
+
+    }
+
+
+    /* BUAT DATA */
+
+    const dataBaru = {
+
+        id: Date.now(),
+
+        nama: namaPeserta,
+
+        mlid: idML || "-",
+
+        donate: jumlahDonate,
+
+        game: jumlahGame
+
+    };
+
+
+    peserta.push(dataBaru);
+
+
+    /* SIMPAN */
+
+    simpanData();
+
+
+    /* TAMPILKAN */
+
+    tampilkanData();
+
+
+    /* TUTUP */
+
+    tutupForm();
+
+});
+
+
+/* =========================
+   SIMPAN DATA
+========================= */
+
+function simpanData(){
+
+    localStorage.setItem(
+        "vipPeserta",
+        JSON.stringify(peserta)
+    );
+
+}
+
+
+/* =========================
+   LOAD DATA
+========================= */
+
+function loadData(){
+
+    const data = localStorage.getItem(
+        "vipPeserta"
+    );
+
+    if(data){
+
+        try{
+
+            peserta = JSON.parse(data);
+
+        }catch(e){
+
+            peserta = [];
+
+        }
+
+    }
+
+
+    const hargaTersimpan =
+        localStorage.getItem("vipHarga");
+
+    if(hargaTersimpan){
+
+        hargaVIP = Number(hargaTersimpan);
+
+        hargaInput.value = hargaVIP;
+
+    }
+
+}
+
+
+/* =========================
+   TAMPILKAN DATA
+========================= */
+
+function tampilkanData(){
+
+    let totalGame = 0;
+
+    let totalDonate = 0;
+
+
+    for(let i = 0; i < peserta.length; i++){
+
+        totalGame += Number(
+            peserta[i].game
+        ) || 0;
+
+        totalDonate += Number(
+            peserta[i].donate
+        ) || 0;
+
+    }
+
+
+    document.getElementById(
+        "jumlahPeserta"
+    ).innerText = peserta.length;
+
+
+    document.getElementById(
+        "jumlahGame"
+    ).innerText = totalGame;
+
+
+    document.getElementById(
+        "totalDonate"
+    ).innerText = rupiah(totalDonate);
+
+
+    /* KOSONG */
+
+    if(peserta.length === 0){
+
+        daftarPeserta.innerHTML =
+            '<div class="empty">Belum ada peserta.</div>';
+
+        return;
+
+    }
+
+
+    /* PESERTA AKTIF DI ATAS */
+
+    peserta.sort(function(a,b){
+
+        return b.game - a.game;
+
+    });
+
+
+    let html = "";
+
+
+    for(let i = 0; i < peserta.length; i++){
+
+        const p = peserta[i];
+
+        const selesai = p.game <= 0;
+
+
+        html += `
+
+        <div class="participant ${selesai ? "done" : ""}">
+
+            <div class="participant-top">
+
+                <div>
+
+                    <div class="name">
+                        ${aman(p.nama)}
+                    </div>
+
+                    <div class="ml-id">
+                        ID ML: ${aman(p.mlid)}
+                    </div>
+
+                    <div class="donate">
+                        Donate:
+                        <strong>
+                            ${rupiah(p.donate)}
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div class="games">
+
+                    ${
+                        selesai
+
+                        ? '<div class="done-text">✓ SELESAI</div>'
+
+                        : `
+                            <div class="game-number">
+                                ${p.game}
+                            </div>
+
+                            <div class="game-label">
+                                GAME TERSISA
+                            </div>
+                        `
+                    }
+
+                </div>
+
+            </div>
+
+
+            <div class="controls">
+
+                <button
+                    type="button"
+                    class="control minus"
+                    onclick="kurangiGame(${p.id})"
+                    ${selesai ? "disabled" : ""}
+                >
+                    − 1 GAME
+                </button>
+
+
+                <button
+                    type="button"
+                    class="control plus"
+                    onclick="tambahGame(${p.id})"
+                >
+                    + 1 GAME
+                </button>
+
+
+                <button
+                    type="button"
+                    class="control delete"
+                    onclick="hapusPeserta(${p.id})"
+                >
+                    HAPUS
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+
+    }
+
+
+    daftarPeserta.innerHTML = html;
+
+}
+
+
+/* =========================
+   KURANGI GAME
+========================= */
+
+function kurangiGame(id){
+
+    const p = peserta.find(function(item){
+
+        return item.id === id;
+
+    });
+
+
+    if(!p) return;
+
+
+    if(p.game > 0){
+
+        p.game--;
+
+    }
+
+
+    simpanData();
+
+    tampilkanData();
+
+}
+
+
+/* =========================
+   TAMBAH GAME
+========================= */
+
+function tambahGame(id){
+
+    const p = peserta.find(function(item){
+
+        return item.id === id;
+
+    });
+
+
+    if(!p) return;
+
+
+    p.game++;
+
+
+    simpanData();
+
+    tampilkanData();
+
+}
+
+
+/* =========================
+   HAPUS PESERTA
+========================= */
+
+function hapusPeserta(id){
+
+    const p = peserta.find(function(item){
+
+        return item.id === id;
+
+    });
+
+
+    if(!p) return;
+
+
+    if(
+        !confirm(
+            "Hapus peserta " +
+            p.nama +
+            "?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    peserta = peserta.filter(function(item){
+
+        return item.id !== id;
+
+    });
+
+
+    simpanData();
+
+    tampilkanData();
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+document.getElementById(
+    "resetData"
+).addEventListener("click", function(){
+
+    if(peserta.length === 0){
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            "Yakin ingin menghapus semua peserta?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    peserta = [];
+
+    simpanData();
+
+    tampilkanData();
+
+});
+
+
+/* =========================
+   AMANKAN TEXT
+========================= */
+
+function aman(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+   ENTER = TAMBAH
+========================= */
+
+[nama, mlid, donate].forEach(function(input){
+
+    input.addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                tombolSimpan.click();
+
+            }
+
+        }
+    );
+
+});
+
+
+/* =========================
+   JALANKAN PROGRAM
+========================= */
+
+loadData();
+
+tampilkanData();
+
+hitungGame();
+
+</script>
+
+</body>
+</html>
