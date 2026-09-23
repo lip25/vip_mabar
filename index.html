@@ -101,7 +101,7 @@ input:focus{
     margin-top:5px;
 }
 
-/* TOMBOL UTAMA */
+/* TOMBOL TAMBAH */
 
 .add-main{
     width:100%;
@@ -114,6 +114,7 @@ input:focus{
     font-weight:bold;
     font-size:13px;
     margin-bottom:12px;
+    cursor:pointer;
 }
 
 .add-main:active{
@@ -150,6 +151,7 @@ input:focus{
     background:#181b24;
     color:#aaa;
     font-size:18px;
+    cursor:pointer;
 }
 
 .field{
@@ -192,6 +194,7 @@ input:focus{
     border-radius:10px;
     padding:12px;
     font-weight:bold;
+    cursor:pointer;
 }
 
 .save{
@@ -239,6 +242,7 @@ input:focus{
     font-size:11px;
     font-weight:bold;
     margin-bottom:12px;
+    cursor:pointer;
 }
 
 .queue-preview{
@@ -333,6 +337,7 @@ input:focus{
     color:#ddd;
     font-size:10px;
     font-weight:bold;
+    cursor:pointer;
 }
 
 .minus{
@@ -356,6 +361,7 @@ input:focus{
     border-radius:10px;
     color:#666;
     font-size:10px;
+    cursor:pointer;
 }
 
 .empty{
@@ -621,17 +627,11 @@ input:focus{
 
 <script>
 
-/* =========================================
-   DATA
-========================================= */
-
 var peserta = [];
 var hargaVIP = 5000;
 
 
-/* =========================================
-   ELEMENT
-========================================= */
+/* ELEMENT */
 
 var hargaInput =
     document.getElementById("hargaVIP");
@@ -676,9 +676,7 @@ var daftarPeserta =
     document.getElementById("daftarPeserta");
 
 
-/* =========================================
-   RUPIAH
-========================================= */
+/* RUPIAH */
 
 function rupiah(angka){
 
@@ -690,9 +688,7 @@ function rupiah(angka){
 }
 
 
-/* =========================================
-   SIMPAN DATA
-========================================= */
+/* SIMPAN */
 
 function simpan(){
 
@@ -720,9 +716,7 @@ function simpan(){
 }
 
 
-/* =========================================
-   LOAD DATA
-========================================= */
+/* LOAD */
 
 function loadData(){
 
@@ -780,9 +774,7 @@ function loadData(){
 }
 
 
-/* =========================================
-   BUKA FORM
-========================================= */
+/* BUKA FORM */
 
 function bukaForm(){
 
@@ -795,9 +787,7 @@ function bukaForm(){
 }
 
 
-/* =========================================
-   TUTUP FORM
-========================================= */
+/* TUTUP FORM */
 
 function tutupForm(){
 
@@ -814,9 +804,7 @@ function tutupForm(){
 }
 
 
-/* =========================================
-   PREVIEW
-========================================= */
+/* PREVIEW */
 
 function hitungPreview(){
 
@@ -858,9 +846,7 @@ function hitungPreview(){
 }
 
 
-/* =========================================
-   TAMBAH PESERTA
-========================================= */
+/* TAMBAH PESERTA */
 
 function tambahPeserta(){
 
@@ -980,9 +966,7 @@ function tambahPeserta(){
 }
 
 
-/* =========================================
-   TAMPILKAN PESERTA
-========================================= */
+/* TAMPILKAN */
 
 function tampilkan(){
 
@@ -1123,7 +1107,6 @@ function tampilkan(){
 
             '</div>' +
 
-
             '<div class="controls">' +
 
                 '<button ' +
@@ -1142,7 +1125,6 @@ function tampilkan(){
                     '− 1 GAME' +
                 '</button>' +
 
-
                 '<button ' +
                     'type="button" ' +
                     'class="control plus" ' +
@@ -1153,7 +1135,6 @@ function tampilkan(){
                 '>' +
                     '+ 1 GAME' +
                 '</button>' +
-
 
                 '<button ' +
                     'type="button" ' +
@@ -1179,9 +1160,7 @@ function tampilkan(){
 }
 
 
-/* =========================================
-   AMBIL PESERTA AKTIF
-========================================= */
+/* PESERTA AKTIF */
 
 function getAktif(){
 
@@ -1214,10 +1193,18 @@ function getAktif(){
 }
 
 
-/* =========================================
-   BUAT TEKS ANTRIAN
-   HANYA NAMA + GAME
-========================================= */
+/* =================================
+   TEKS CLIPBOARD
+
+   HANYA:
+   NAMA | JUMLAH GAME
+
+   TIDAK ADA:
+   - JUDUL
+   - NOMOR
+   - EMOJI
+   - DONATE
+================================= */
 
 function buatTextAntrian(){
 
@@ -1234,8 +1221,7 @@ function buatTextAntrian(){
     }
 
 
-    var text =
-        "🎮 ANTRIAN VIP MABAR RHEA\n\n";
+    var text = "";
 
 
     for(
@@ -1249,8 +1235,6 @@ function buatTextAntrian(){
 
 
         text +=
-            (i + 1) +
-            ". " +
             p.nama +
             " | " +
             p.game +
@@ -1274,9 +1258,7 @@ function buatTextAntrian(){
 }
 
 
-/* =========================================
-   TAMPILKAN ANTRIAN
-========================================= */
+/* TAMPILKAN ANTRIAN */
 
 function tampilkanAntrian(){
 
@@ -1317,9 +1299,7 @@ function tampilkanAntrian(){
 }
 
 
-/* =========================================
-   KURANGI GAME
-========================================= */
+/* KURANGI GAME */
 
 function kurangiGame(id){
 
@@ -1370,9 +1350,7 @@ function kurangiGame(id){
 }
 
 
-/* =========================================
-   TAMBAH GAME
-========================================= */
+/* TAMBAH GAME */
 
 function tambahGame(id){
 
@@ -1410,9 +1388,7 @@ function tambahGame(id){
 }
 
 
-/* =========================================
-   HAPUS PESERTA
-========================================= */
+/* HAPUS */
 
 function hapusPeserta(id){
 
@@ -1463,9 +1439,7 @@ function hapusPeserta(id){
 }
 
 
-/* =========================================
-   RESET SEMUA DATA
-========================================= */
+/* RESET */
 
 function resetData(){
 
@@ -1500,9 +1474,7 @@ function resetData(){
 }
 
 
-/* =========================================
-   COPY ANTRIAN
-========================================= */
+/* COPY MANUAL */
 
 function salinManual(text){
 
@@ -1540,7 +1512,6 @@ function salinManual(text){
             "copy"
         );
 
-
         alert(
             "Antrian berhasil disalin."
         );
@@ -1548,7 +1519,7 @@ function salinManual(text){
     }catch(error){
 
         alert(
-            "Gagal menyalin. Silakan salin manual."
+            "Gagal menyalin."
         );
 
     }
@@ -1560,6 +1531,8 @@ function salinManual(text){
 
 }
 
+
+/* COPY */
 
 function salinAntrian(){
 
@@ -1607,9 +1580,7 @@ function salinAntrian(){
 }
 
 
-/* =========================================
-   AMANKAN HTML
-========================================= */
+/* AMANKAN HTML */
 
 function aman(text){
 
@@ -1643,9 +1614,7 @@ function aman(text){
 }
 
 
-/* =========================================
-   EVENT TOMBOL
-========================================= */
+/* EVENT TAMBAH */
 
 btnTambah.addEventListener(
     "click",
@@ -1657,6 +1626,8 @@ btnTambah.addEventListener(
 );
 
 
+/* EVENT CLOSE */
+
 btnClose.addEventListener(
     "click",
     function(){
@@ -1666,6 +1637,8 @@ btnClose.addEventListener(
     }
 );
 
+
+/* EVENT BATAL */
 
 btnCancel.addEventListener(
     "click",
@@ -1677,6 +1650,8 @@ btnCancel.addEventListener(
 );
 
 
+/* EVENT SIMPAN */
+
 btnSave.addEventListener(
     "click",
     function(){
@@ -1686,6 +1661,8 @@ btnSave.addEventListener(
     }
 );
 
+
+/* EVENT COPY */
 
 btnCopy.addEventListener(
     "click",
@@ -1697,6 +1674,8 @@ btnCopy.addEventListener(
 );
 
 
+/* EVENT RESET */
+
 btnReset.addEventListener(
     "click",
     function(){
@@ -1707,9 +1686,7 @@ btnReset.addEventListener(
 );
 
 
-/* =========================================
-   PREVIEW DONATE
-========================================= */
+/* INPUT DONATE */
 
 donateInput.addEventListener(
     "input",
@@ -1721,9 +1698,7 @@ donateInput.addEventListener(
 );
 
 
-/* =========================================
-   HARGA VIP
-========================================= */
+/* INPUT HARGA */
 
 hargaInput.addEventListener(
     "input",
@@ -1754,9 +1729,7 @@ hargaInput.addEventListener(
 );
 
 
-/* =========================================
-   EVENT PESERTA
-========================================= */
+/* EVENT TOMBOL PESERTA */
 
 daftarPeserta.addEventListener(
     "click",
@@ -1817,9 +1790,7 @@ daftarPeserta.addEventListener(
 );
 
 
-/* =========================================
-   MULAI
-========================================= */
+/* MULAI */
 
 loadData();
 
