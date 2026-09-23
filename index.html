@@ -74,16 +74,6 @@ input:focus{
     border-color:#8b5cf6;
 }
 
-button{
-    font-family:Arial,sans-serif;
-    cursor:pointer;
-}
-
-button:disabled{
-    opacity:.4;
-    cursor:not-allowed;
-}
-
 /* STATISTIK */
 
 .stats{
@@ -605,7 +595,7 @@ button:disabled{
 
 </div>
 
-<!-- DAFTAR -->
+<!-- DAFTAR PESERTA -->
 
 <div class="section">
     DAFTAR PESERTA
@@ -631,53 +621,78 @@ button:disabled{
 
 <script>
 
-/* ==============================
+/* =========================================
    DATA
-============================== */
+========================================= */
 
 var peserta = [];
-
 var hargaVIP = 5000;
 
 
-/* ==============================
+/* =========================================
    ELEMENT
-============================== */
+========================================= */
 
-var hargaInput = document.getElementById("hargaVIP");
-var btnTambah = document.getElementById("btnTambah");
-var btnClose = document.getElementById("btnClose");
-var btnCancel = document.getElementById("btnCancel");
-var btnSave = document.getElementById("btnSave");
-var btnCopy = document.getElementById("btnCopy");
-var btnReset = document.getElementById("btnReset");
+var hargaInput =
+    document.getElementById("hargaVIP");
 
-var formPeserta = document.getElementById("formPeserta");
+var btnTambah =
+    document.getElementById("btnTambah");
 
-var namaInput = document.getElementById("nama");
-var mlidInput = document.getElementById("mlid");
-var donateInput = document.getElementById("donate");
+var btnClose =
+    document.getElementById("btnClose");
 
-var previewDonate = document.getElementById("previewDonate");
-var previewGame = document.getElementById("previewGame");
+var btnCancel =
+    document.getElementById("btnCancel");
+
+var btnSave =
+    document.getElementById("btnSave");
+
+var btnCopy =
+    document.getElementById("btnCopy");
+
+var btnReset =
+    document.getElementById("btnReset");
+
+var formPeserta =
+    document.getElementById("formPeserta");
+
+var namaInput =
+    document.getElementById("nama");
+
+var mlidInput =
+    document.getElementById("mlid");
+
+var donateInput =
+    document.getElementById("donate");
+
+var previewDonate =
+    document.getElementById("previewDonate");
+
+var previewGame =
+    document.getElementById("previewGame");
+
+var daftarPeserta =
+    document.getElementById("daftarPeserta");
 
 
-/* ==============================
+/* =========================================
    RUPIAH
-============================== */
+========================================= */
 
 function rupiah(angka){
 
     angka = Number(angka) || 0;
 
-    return "Rp" + angka.toLocaleString("id-ID");
+    return "Rp" +
+        angka.toLocaleString("id-ID");
 
 }
 
 
-/* ==============================
-   SIMPAN
-============================== */
+/* =========================================
+   SIMPAN DATA
+========================================= */
 
 function simpan(){
 
@@ -695,30 +710,37 @@ function simpan(){
 
     }catch(error){
 
-        console.log("Gagal menyimpan:",error);
+        console.log(
+            "Gagal menyimpan:",
+            error
+        );
 
     }
 
 }
 
 
-/* ==============================
-   LOAD
-============================== */
+/* =========================================
+   LOAD DATA
+========================================= */
 
 function loadData(){
 
     try{
 
         var data =
-            localStorage.getItem("vipPeserta");
+            localStorage.getItem(
+                "vipPeserta"
+            );
 
         if(data){
 
             var parsed =
                 JSON.parse(data);
 
-            if(Array.isArray(parsed)){
+            if(
+                Array.isArray(parsed)
+            ){
 
                 peserta = parsed;
 
@@ -726,10 +748,14 @@ function loadData(){
 
         }
 
+
         var harga =
             Number(
-                localStorage.getItem("vipHarga")
+                localStorage.getItem(
+                    "vipHarga"
+                )
             );
+
 
         if(
             Number.isFinite(harga) &&
@@ -743,36 +769,41 @@ function loadData(){
     }catch(error){
 
         peserta = [];
-
         hargaVIP = 5000;
 
     }
 
-    hargaInput.value = hargaVIP;
+
+    hargaInput.value =
+        hargaVIP;
 
 }
 
 
-/* ==============================
+/* =========================================
    BUKA FORM
-============================== */
+========================================= */
 
 function bukaForm(){
 
-    formPeserta.classList.add("show");
+    formPeserta.classList.add(
+        "show"
+    );
 
     namaInput.focus();
 
 }
 
 
-/* ==============================
+/* =========================================
    TUTUP FORM
-============================== */
+========================================= */
 
 function tutupForm(){
 
-    formPeserta.classList.remove("show");
+    formPeserta.classList.remove(
+        "show"
+    );
 
     namaInput.value = "";
     mlidInput.value = "";
@@ -783,19 +814,26 @@ function tutupForm(){
 }
 
 
-/* ==============================
+/* =========================================
    PREVIEW
-============================== */
+========================================= */
 
 function hitungPreview(){
 
     var donate =
-        Number(donateInput.value) || 0;
+        Number(
+            donateInput.value
+        ) || 0;
+
 
     var harga =
-        Number(hargaInput.value) || 5000;
+        Number(
+            hargaInput.value
+        ) || 5000;
+
 
     var game = 0;
+
 
     if(
         donate > 0 &&
@@ -809,8 +847,10 @@ function hitungPreview(){
 
     }
 
+
     previewDonate.innerText =
         rupiah(donate);
+
 
     previewGame.innerText =
         game + " Game";
@@ -818,28 +858,37 @@ function hitungPreview(){
 }
 
 
-/* ==============================
+/* =========================================
    TAMBAH PESERTA
-============================== */
+========================================= */
 
 function tambahPeserta(){
 
     var nama =
         namaInput.value.trim();
 
+
     var mlid =
         mlidInput.value.trim();
 
+
     var donate =
-        Number(donateInput.value);
+        Number(
+            donateInput.value
+        );
+
 
     var harga =
-        Number(hargaInput.value);
+        Number(
+            hargaInput.value
+        );
 
 
     if(!nama){
 
-        alert("Masukkan nama atau ID donate.");
+        alert(
+            "Masukkan nama atau ID donate."
+        );
 
         namaInput.focus();
 
@@ -853,7 +902,9 @@ function tambahPeserta(){
         donate <= 0
     ){
 
-        alert("Masukkan jumlah donate.");
+        alert(
+            "Masukkan jumlah donate."
+        );
 
         donateInput.focus();
 
@@ -867,7 +918,9 @@ function tambahPeserta(){
         harga <= 0
     ){
 
-        alert("Harga VIP tidak valid.");
+        alert(
+            "Harga VIP tidak valid."
+        );
 
         return;
 
@@ -897,14 +950,17 @@ function tambahPeserta(){
             String(Date.now()) +
             String(Math.random()),
 
-        nama:nama,
+        nama:
+            nama,
 
         mlid:
             mlid || "-",
 
-        donate:donate,
+        donate:
+            donate,
 
-        game:game
+        game:
+            game
 
     };
 
@@ -924,9 +980,9 @@ function tambahPeserta(){
 }
 
 
-/* ==============================
+/* =========================================
    TAMPILKAN PESERTA
-============================== */
+========================================= */
 
 function tampilkan(){
 
@@ -935,16 +991,21 @@ function tampilkan(){
 
 
     for(
-        var i=0;
-        i<peserta.length;
+        var i = 0;
+        i < peserta.length;
         i++
     ){
 
         jumlahGame +=
-            Number(peserta[i].game) || 0;
+            Number(
+                peserta[i].game
+            ) || 0;
+
 
         totalDonate +=
-            Number(peserta[i].donate) || 0;
+            Number(
+                peserta[i].donate
+            ) || 0;
 
     }
 
@@ -967,15 +1028,11 @@ function tampilkan(){
         rupiah(totalDonate);
 
 
-    var daftar =
-        document.getElementById(
-            "daftarPeserta"
-        );
+    if(
+        peserta.length === 0
+    ){
 
-
-    if(peserta.length === 0){
-
-        daftar.innerHTML =
+        daftarPeserta.innerHTML =
             '<div class="empty">' +
             'Belum ada peserta.' +
             '</div>';
@@ -989,15 +1046,18 @@ function tampilkan(){
 
 
     for(
-        var i=0;
-        i<peserta.length;
+        var i = 0;
+        i < peserta.length;
         i++
     ){
 
-        var p = peserta[i];
+        var p =
+            peserta[i];
+
 
         var game =
             Number(p.game) || 0;
+
 
         var selesai =
             game <= 0;
@@ -1005,7 +1065,11 @@ function tampilkan(){
 
         html +=
         '<div class="participant ' +
-        (selesai ? "done" : "") +
+        (
+            selesai
+            ? "done"
+            : ""
+        ) +
         '">' +
 
             '<div class="participant-top">' +
@@ -1037,12 +1101,13 @@ function tampilkan(){
                         ?
 
                         '<div class="done-text">' +
-                        '✓ SELESAI' +
+                            '✓ SELESAI' +
                         '</div>'
 
                         :
 
                         '<div>' +
+
                             '<div class="game-number">' +
                                 game +
                             '</div>' +
@@ -1058,32 +1123,45 @@ function tampilkan(){
 
             '</div>' +
 
+
             '<div class="controls">' +
 
                 '<button ' +
                     'type="button" ' +
                     'class="control minus" ' +
                     'data-action="minus" ' +
-                    'data-id="' + p.id + '"' +
-                    (selesai ? ' disabled' : '') +
+                    'data-id="' +
+                        aman(p.id) +
+                    '"' +
+                    (
+                        selesai
+                        ? ' disabled'
+                        : ''
+                    ) +
                 '>' +
                     '− 1 GAME' +
                 '</button>' +
+
 
                 '<button ' +
                     'type="button" ' +
                     'class="control plus" ' +
                     'data-action="plus" ' +
-                    'data-id="' + p.id + '"' +
+                    'data-id="' +
+                        aman(p.id) +
+                    '"' +
                 '>' +
                     '+ 1 GAME' +
                 '</button>' +
+
 
                 '<button ' +
                     'type="button" ' +
                     'class="control delete" ' +
                     'data-action="delete" ' +
-                    'data-id="' + p.id + '"' +
+                    'data-id="' +
+                        aman(p.id) +
+                    '"' +
                 '>' +
                     'HAPUS' +
                 '</button>' +
@@ -1095,27 +1173,31 @@ function tampilkan(){
     }
 
 
-    daftar.innerHTML = html;
+    daftarPeserta.innerHTML =
+        html;
 
 }
 
 
-/* ==============================
-   ANTRIAN
-============================== */
+/* =========================================
+   AMBIL PESERTA AKTIF
+========================================= */
 
 function getAktif(){
 
     var aktif = [];
 
+
     for(
-        var i=0;
-        i<peserta.length;
+        var i = 0;
+        i < peserta.length;
         i++
     ){
 
         if(
-            Number(peserta[i].game) > 0
+            Number(
+                peserta[i].game
+            ) > 0
         ){
 
             aktif.push(
@@ -1126,21 +1208,35 @@ function getAktif(){
 
     }
 
+
     return aktif;
 
 }
 
 
+/* =========================================
+   BUAT TEKS ANTRIAN
+   HANYA NAMA + GAME
+========================================= */
+
 function buatTextAntrian(){
 
-    var aktif = getAktif();
+    var aktif =
+        getAktif();
 
-    if(aktif.length === 0){
+
+    if(
+        aktif.length === 0
+    ){
+
         return "";
+
     }
+
 
     var text =
         "🎮 ANTRIAN VIP MABAR RHEA\n\n";
+
 
     for(
         var i = 0;
@@ -1148,7 +1244,9 @@ function buatTextAntrian(){
         i++
     ){
 
-        var p = aktif[i];
+        var p =
+            aktif[i];
+
 
         text +=
             (i + 1) +
@@ -1158,15 +1256,27 @@ function buatTextAntrian(){
             p.game +
             " Game";
 
-        if(i < aktif.length - 1){
+
+        if(
+            i <
+            aktif.length - 1
+        ){
+
             text += "\n";
+
         }
 
     }
 
+
     return text;
+
 }
 
+
+/* =========================================
+   TAMPILKAN ANTRIAN
+========================================= */
 
 function tampilkanAntrian(){
 
@@ -1187,7 +1297,9 @@ function tampilkanAntrian(){
         );
 
 
-    if(aktif.length === 0){
+    if(
+        aktif.length === 0
+    ){
 
         preview.innerHTML =
             '<div class="queue-empty">' +
@@ -1205,25 +1317,29 @@ function tampilkanAntrian(){
 }
 
 
-/* ==============================
+/* =========================================
    KURANGI GAME
-============================== */
+========================================= */
 
 function kurangiGame(id){
 
     for(
-        var i=0;
-        i<peserta.length;
+        var i = 0;
+        i < peserta.length;
         i++
     ){
 
         if(
-            String(peserta[i].id) ===
+            String(
+                peserta[i].id
+            ) ===
             String(id)
         ){
 
             if(
-                Number(peserta[i].game) > 0
+                Number(
+                    peserta[i].game
+                ) > 0
             ){
 
                 peserta[i].game--;
@@ -1235,6 +1351,7 @@ function kurangiGame(id){
                     peserta[i].game = 0;
 
                 }
+
 
                 simpan();
 
@@ -1253,25 +1370,30 @@ function kurangiGame(id){
 }
 
 
-/* ==============================
+/* =========================================
    TAMBAH GAME
-============================== */
+========================================= */
 
 function tambahGame(id){
 
     for(
-        var i=0;
-        i<peserta.length;
+        var i = 0;
+        i < peserta.length;
         i++
     ){
 
         if(
-            String(peserta[i].id) ===
+            String(
+                peserta[i].id
+            ) ===
             String(id)
         ){
 
             peserta[i].game =
-                Number(peserta[i].game) + 1;
+                Number(
+                    peserta[i].game
+                ) + 1;
+
 
             simpan();
 
@@ -1288,19 +1410,17 @@ function tambahGame(id){
 }
 
 
-/* ==============================
+/* =========================================
    HAPUS PESERTA
-============================== */
+========================================= */
 
 function hapusPeserta(id){
 
-    var yakin =
-        confirm(
+    if(
+        !confirm(
             "Hapus peserta ini?"
-        );
-
-
-    if(!yakin){
+        )
+    ){
 
         return;
 
@@ -1311,13 +1431,15 @@ function hapusPeserta(id){
 
 
     for(
-        var i=0;
-        i<peserta.length;
+        var i = 0;
+        i < peserta.length;
         i++
     ){
 
         if(
-            String(peserta[i].id) !==
+            String(
+                peserta[i].id
+            ) !==
             String(id)
         ){
 
@@ -1341,6 +1463,373 @@ function hapusPeserta(id){
 }
 
 
-/* ==============================
-   RESET
-==========
+/* =========================================
+   RESET SEMUA DATA
+========================================= */
+
+function resetData(){
+
+    if(
+        peserta.length === 0
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            "Yakin ingin menghapus SEMUA peserta?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    peserta = [];
+
+    simpan();
+
+    tampilkan();
+
+    tampilkanAntrian();
+
+}
+
+
+/* =========================================
+   COPY ANTRIAN
+========================================= */
+
+function salinManual(text){
+
+    var area =
+        document.createElement(
+            "textarea"
+        );
+
+
+    area.value =
+        text;
+
+
+    area.style.position =
+        "fixed";
+
+
+    area.style.left =
+        "-9999px";
+
+
+    document.body.appendChild(
+        area
+    );
+
+
+    area.focus();
+
+    area.select();
+
+
+    try{
+
+        document.execCommand(
+            "copy"
+        );
+
+
+        alert(
+            "Antrian berhasil disalin."
+        );
+
+    }catch(error){
+
+        alert(
+            "Gagal menyalin. Silakan salin manual."
+        );
+
+    }
+
+
+    document.body.removeChild(
+        area
+    );
+
+}
+
+
+function salinAntrian(){
+
+    var text =
+        buatTextAntrian();
+
+
+    if(!text){
+
+        alert(
+            "Belum ada pemain dalam antrian."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        navigator.clipboard &&
+        navigator.clipboard.writeText
+    ){
+
+        navigator.clipboard
+            .writeText(text)
+            .then(function(){
+
+                alert(
+                    "Antrian berhasil disalin."
+                );
+
+            })
+            .catch(function(){
+
+                salinManual(text);
+
+            });
+
+    }else{
+
+        salinManual(text);
+
+    }
+
+}
+
+
+/* =========================================
+   AMANKAN HTML
+========================================= */
+
+function aman(text){
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================
+   EVENT TOMBOL
+========================================= */
+
+btnTambah.addEventListener(
+    "click",
+    function(){
+
+        bukaForm();
+
+    }
+);
+
+
+btnClose.addEventListener(
+    "click",
+    function(){
+
+        tutupForm();
+
+    }
+);
+
+
+btnCancel.addEventListener(
+    "click",
+    function(){
+
+        tutupForm();
+
+    }
+);
+
+
+btnSave.addEventListener(
+    "click",
+    function(){
+
+        tambahPeserta();
+
+    }
+);
+
+
+btnCopy.addEventListener(
+    "click",
+    function(){
+
+        salinAntrian();
+
+    }
+);
+
+
+btnReset.addEventListener(
+    "click",
+    function(){
+
+        resetData();
+
+    }
+);
+
+
+/* =========================================
+   PREVIEW DONATE
+========================================= */
+
+donateInput.addEventListener(
+    "input",
+    function(){
+
+        hitungPreview();
+
+    }
+);
+
+
+/* =========================================
+   HARGA VIP
+========================================= */
+
+hargaInput.addEventListener(
+    "input",
+    function(){
+
+        var harga =
+            Number(
+                hargaInput.value
+            );
+
+
+        if(
+            Number.isFinite(harga) &&
+            harga > 0
+        ){
+
+            hargaVIP =
+                harga;
+
+            simpan();
+
+        }
+
+
+        hitungPreview();
+
+    }
+);
+
+
+/* =========================================
+   EVENT PESERTA
+========================================= */
+
+daftarPeserta.addEventListener(
+    "click",
+    function(event){
+
+        var tombol =
+            event.target.closest(
+                "button[data-action]"
+            );
+
+
+        if(!tombol){
+
+            return;
+
+        }
+
+
+        var action =
+            tombol.getAttribute(
+                "data-action"
+            );
+
+
+        var id =
+            tombol.getAttribute(
+                "data-id"
+            );
+
+
+        if(
+            action === "minus"
+        ){
+
+            kurangiGame(id);
+
+        }
+
+
+        if(
+            action === "plus"
+        ){
+
+            tambahGame(id);
+
+        }
+
+
+        if(
+            action === "delete"
+        ){
+
+            hapusPeserta(id);
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   MULAI
+========================================= */
+
+loadData();
+
+tampilkan();
+
+tampilkanAntrian();
+
+hitungPreview();
+
+</script>
+
+</body>
+</html>
