@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#08090d">
 <title>VIP Mabar Rhea</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
 body{
     margin:0;
@@ -38,11 +39,16 @@ h1{
     margin-top:5px;
 }
 
-.card{
+.card,
+.queue-card,
+.participant{
     background:#11131a;
     border:1px solid #292d38;
     border-radius:15px;
     padding:15px;
+}
+
+.card{
     margin-bottom:12px;
 }
 
@@ -59,7 +65,7 @@ input{
     border-radius:10px;
     border:1px solid #292d38;
     background:#08090d;
-    color:white;
+    color:#fff;
     outline:none;
     font-size:14px;
 }
@@ -67,6 +73,18 @@ input{
 input:focus{
     border-color:#8b5cf6;
 }
+
+button{
+    font-family:Arial,sans-serif;
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+/* STATISTIK */
 
 .stats{
     display:grid;
@@ -93,13 +111,16 @@ input:focus{
     margin-top:5px;
 }
 
+/* TOMBOL UTAMA */
+
 .add-main{
     width:100%;
+    display:block;
     border:0;
     border-radius:13px;
     padding:14px;
     background:#7c3aed;
-    color:white;
+    color:#fff;
     font-weight:bold;
     font-size:13px;
     margin-bottom:12px;
@@ -109,11 +130,13 @@ input:focus{
     transform:scale(.98);
 }
 
+/* FORM */
+
 .form{
     display:none;
 }
 
-.form.active{
+.form.show{
     display:block;
 }
 
@@ -130,8 +153,8 @@ input:focus{
 }
 
 .close{
-    width:30px;
-    height:30px;
+    width:32px;
+    height:32px;
     border:1px solid #333;
     border-radius:8px;
     background:#181b24;
@@ -174,22 +197,78 @@ input:focus{
     gap:8px;
 }
 
-.save{
-    border:0;
+.save,
+.cancel{
     border-radius:10px;
-    background:#7c3aed;
-    color:white;
     padding:12px;
     font-weight:bold;
 }
 
+.save{
+    border:0;
+    background:#7c3aed;
+    color:#fff;
+}
+
 .cancel{
     border:1px solid #292d38;
-    border-radius:10px;
     background:#181b24;
     color:#aaa;
-    padding:12px;
 }
+
+/* ANTRIAN */
+
+.queue-card{
+    margin-top:18px;
+}
+
+.queue-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+}
+
+.queue-title{
+    font-size:14px;
+    font-weight:bold;
+}
+
+.queue-count{
+    color:#888;
+    font-size:10px;
+}
+
+.copy-queue{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    background:#21182e;
+    border:1px solid #49356d;
+    color:#c4b5fd;
+    font-size:11px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+.queue-preview{
+    background:#08090d;
+    border:1px solid #292d38;
+    border-radius:10px;
+    padding:12px;
+    color:#bbb;
+    font-size:11px;
+    line-height:1.7;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+
+.queue-empty{
+    color:#666;
+    text-align:center;
+}
+
+/* DAFTAR */
 
 .section{
     margin-top:18px;
@@ -199,15 +278,11 @@ input:focus{
 }
 
 .participant{
-    background:#11131a;
-    border:1px solid #292d38;
-    border-radius:15px;
-    padding:15px;
     margin-bottom:9px;
 }
 
 .participant.done{
-    opacity:.55;
+    opacity:.5;
 }
 
 .participant-top{
@@ -219,7 +294,6 @@ input:focus{
 .name{
     font-size:14px;
     font-weight:bold;
-    word-break:break-word;
 }
 
 .ml-id{
@@ -333,6 +407,8 @@ input:focus{
     <div class="subtitle">Dashboard Peserta</div>
 </header>
 
+<!-- HARGA -->
+
 <div class="card">
 
     <label>HARGA VIP PER GAME</label>
@@ -345,6 +421,8 @@ input:focus{
     >
 
 </div>
+
+<!-- STATISTIK -->
 
 <div class="stats">
 
@@ -365,13 +443,17 @@ input:focus{
 
 </div>
 
+<!-- TOMBOL TAMBAH -->
+
 <button
     type="button"
     class="add-main"
-    id="tombolTambah"
+    id="btnTambah"
 >
     + TAMBAH PESERTA
 </button>
+
+<!-- FORM -->
 
 <div
     class="card form"
@@ -385,7 +467,7 @@ input:focus{
         <button
             type="button"
             class="close"
-            id="tombolTutup"
+            id="btnClose"
         >
             ×
         </button>
@@ -468,7 +550,7 @@ input:focus{
         <button
             type="button"
             class="cancel"
-            id="tombolBatal"
+            id="btnCancel"
         >
             BATAL
         </button>
@@ -476,7 +558,7 @@ input:focus{
         <button
             type="button"
             class="save"
-            id="tombolSimpan"
+            id="btnSave"
         >
             TAMBAH
         </button>
@@ -484,6 +566,46 @@ input:focus{
     </div>
 
 </div>
+
+<!-- ANTRIAN -->
+
+<div class="queue-card">
+
+    <div class="queue-header">
+
+        <div class="queue-title">
+            🎮 ANTRIAN PEMAIN
+        </div>
+
+        <div
+            class="queue-count"
+            id="jumlahAntrian"
+        >
+            0 pemain
+        </div>
+
+    </div>
+
+    <button
+        type="button"
+        class="copy-queue"
+        id="btnCopy"
+    >
+        📋 SALIN ANTRIAN
+    </button>
+
+    <div
+        class="queue-preview"
+        id="previewAntrian"
+    >
+        <div class="queue-empty">
+            Belum ada pemain dalam antrian.
+        </div>
+    </div>
+
+</div>
+
+<!-- DAFTAR -->
 
 <div class="section">
     DAFTAR PESERTA
@@ -500,7 +622,7 @@ input:focus{
 <button
     type="button"
     class="reset"
-    id="resetData"
+    id="btnReset"
 >
     RESET SEMUA DATA
 </button>
@@ -509,84 +631,186 @@ input:focus{
 
 <script>
 
-let peserta = [];
+/* ==============================
+   DATA
+============================== */
 
-let hargaVIP = 5000;
+var peserta = [];
 
-
-/* ELEMENT */
-
-const tombolTambah =
-    document.getElementById("tombolTambah");
-
-const tombolTutup =
-    document.getElementById("tombolTutup");
-
-const tombolBatal =
-    document.getElementById("tombolBatal");
-
-const tombolSimpan =
-    document.getElementById("tombolSimpan");
-
-const formPeserta =
-    document.getElementById("formPeserta");
-
-const nama =
-    document.getElementById("nama");
-
-const mlid =
-    document.getElementById("mlid");
-
-const donate =
-    document.getElementById("donate");
-
-const hargaInput =
-    document.getElementById("hargaVIP");
-
-const previewDonate =
-    document.getElementById("previewDonate");
-
-const previewGame =
-    document.getElementById("previewGame");
-
-const daftarPeserta =
-    document.getElementById("daftarPeserta");
+var hargaVIP = 5000;
 
 
-/* RUPIAH */
+/* ==============================
+   ELEMENT
+============================== */
+
+var hargaInput = document.getElementById("hargaVIP");
+var btnTambah = document.getElementById("btnTambah");
+var btnClose = document.getElementById("btnClose");
+var btnCancel = document.getElementById("btnCancel");
+var btnSave = document.getElementById("btnSave");
+var btnCopy = document.getElementById("btnCopy");
+var btnReset = document.getElementById("btnReset");
+
+var formPeserta = document.getElementById("formPeserta");
+
+var namaInput = document.getElementById("nama");
+var mlidInput = document.getElementById("mlid");
+var donateInput = document.getElementById("donate");
+
+var previewDonate = document.getElementById("previewDonate");
+var previewGame = document.getElementById("previewGame");
+
+
+/* ==============================
+   RUPIAH
+============================== */
 
 function rupiah(angka){
 
-    return "Rp" +
-        Number(angka).toLocaleString("id-ID");
+    angka = Number(angka) || 0;
+
+    return "Rp" + angka.toLocaleString("id-ID");
 
 }
 
 
-/* PREVIEW */
+/* ==============================
+   SIMPAN
+============================== */
 
-function hitungGame(){
+function simpan(){
 
-    const jumlahDonate =
-        Number(donate.value) || 0;
+    try{
 
-    const harga =
-        Number(hargaInput.value) || 5000;
+        localStorage.setItem(
+            "vipPeserta",
+            JSON.stringify(peserta)
+        );
 
-    previewDonate.innerText =
-        rupiah(jumlahDonate);
+        localStorage.setItem(
+            "vipHarga",
+            String(hargaVIP)
+        );
 
-    if(jumlahDonate <= 0){
+    }catch(error){
 
-        previewGame.innerText =
-            "0 Game";
-
-        return;
+        console.log("Gagal menyimpan:",error);
 
     }
 
-    const game =
-        Math.floor(jumlahDonate / harga);
+}
+
+
+/* ==============================
+   LOAD
+============================== */
+
+function loadData(){
+
+    try{
+
+        var data =
+            localStorage.getItem("vipPeserta");
+
+        if(data){
+
+            var parsed =
+                JSON.parse(data);
+
+            if(Array.isArray(parsed)){
+
+                peserta = parsed;
+
+            }
+
+        }
+
+        var harga =
+            Number(
+                localStorage.getItem("vipHarga")
+            );
+
+        if(
+            Number.isFinite(harga) &&
+            harga > 0
+        ){
+
+            hargaVIP = harga;
+
+        }
+
+    }catch(error){
+
+        peserta = [];
+
+        hargaVIP = 5000;
+
+    }
+
+    hargaInput.value = hargaVIP;
+
+}
+
+
+/* ==============================
+   BUKA FORM
+============================== */
+
+function bukaForm(){
+
+    formPeserta.classList.add("show");
+
+    namaInput.focus();
+
+}
+
+
+/* ==============================
+   TUTUP FORM
+============================== */
+
+function tutupForm(){
+
+    formPeserta.classList.remove("show");
+
+    namaInput.value = "";
+    mlidInput.value = "";
+    donateInput.value = "";
+
+    hitungPreview();
+
+}
+
+
+/* ==============================
+   PREVIEW
+============================== */
+
+function hitungPreview(){
+
+    var donate =
+        Number(donateInput.value) || 0;
+
+    var harga =
+        Number(hargaInput.value) || 5000;
+
+    var game = 0;
+
+    if(
+        donate > 0 &&
+        harga > 0
+    ){
+
+        game =
+            Math.floor(
+                donate / harga
+            );
+
+    }
+
+    previewDonate.innerText =
+        rupiah(donate);
 
     previewGame.innerText =
         game + " Game";
@@ -594,261 +818,129 @@ function hitungGame(){
 }
 
 
-/* BUKA FORM */
+/* ==============================
+   TAMBAH PESERTA
+============================== */
 
-tombolTambah.addEventListener(
-    "click",
-    function(){
+function tambahPeserta(){
 
-        formPeserta.classList.add("active");
+    var nama =
+        namaInput.value.trim();
 
-        nama.focus();
+    var mlid =
+        mlidInput.value.trim();
+
+    var donate =
+        Number(donateInput.value);
+
+    var harga =
+        Number(hargaInput.value);
+
+
+    if(!nama){
+
+        alert("Masukkan nama atau ID donate.");
+
+        namaInput.focus();
+
+        return;
 
     }
-);
 
 
-/* TUTUP FORM */
+    if(
+        !Number.isFinite(donate) ||
+        donate <= 0
+    ){
 
-function tutupForm(){
+        alert("Masukkan jumlah donate.");
 
-    formPeserta.classList.remove("active");
+        donateInput.focus();
 
-    nama.value = "";
+        return;
 
-    mlid.value = "";
+    }
 
-    donate.value = "";
 
-    hitungGame();
+    if(
+        !Number.isFinite(harga) ||
+        harga <= 0
+    ){
+
+        alert("Harga VIP tidak valid.");
+
+        return;
+
+    }
+
+
+    var game =
+        Math.floor(
+            donate / harga
+        );
+
+
+    if(game < 1){
+
+        alert(
+            "Donate belum cukup untuk 1 game."
+        );
+
+        return;
+
+    }
+
+
+    var baru = {
+
+        id:
+            String(Date.now()) +
+            String(Math.random()),
+
+        nama:nama,
+
+        mlid:
+            mlid || "-",
+
+        donate:donate,
+
+        game:game
+
+    };
+
+
+    peserta.push(baru);
+
+    hargaVIP = harga;
+
+    simpan();
+
+    tampilkan();
+
+    tampilkanAntrian();
+
+    tutupForm();
 
 }
 
 
-tombolTutup.addEventListener(
-    "click",
-    tutupForm
-);
+/* ==============================
+   TAMPILKAN PESERTA
+============================== */
 
-tombolBatal.addEventListener(
-    "click",
-    tutupForm
-);
+function tampilkan(){
 
-
-/* PREVIEW */
-
-donate.addEventListener(
-    "input",
-    hitungGame
-);
-
-
-/* HARGA VIP */
-
-hargaInput.addEventListener(
-    "input",
-    function(){
-
-        hargaVIP =
-            Number(hargaInput.value) || 5000;
-
-        localStorage.setItem(
-            "vipHarga",
-            hargaVIP
-        );
-
-        hitungGame();
-
-    }
-);
-
-
-/* TAMBAH PESERTA */
-
-tombolSimpan.addEventListener(
-    "click",
-    function(){
-
-        const namaPeserta =
-            nama.value.trim();
-
-        const idML =
-            mlid.value.trim();
-
-        const jumlahDonate =
-            Number(donate.value);
-
-        const harga =
-            Number(hargaInput.value) || 5000;
-
-        const jumlahGame =
-            Math.floor(
-                jumlahDonate / harga
-            );
-
-
-        if(namaPeserta === ""){
-
-            alert(
-                "Masukkan nama atau ID donate."
-            );
-
-            nama.focus();
-
-            return;
-
-        }
-
-
-        if(
-            !Number.isFinite(jumlahDonate) ||
-            jumlahDonate <= 0
-        ){
-
-            alert(
-                "Masukkan jumlah donate."
-            );
-
-            donate.focus();
-
-            return;
-
-        }
-
-
-        if(jumlahGame < 1){
-
-            alert(
-                "Donate belum cukup untuk 1 game.\n\n" +
-                "Harga VIP: " +
-                rupiah(harga)
-            );
-
-            return;
-
-        }
-
-
-        const dataBaru = {
-
-            id:
-                Date.now() +
-                Math.random(),
-
-            nama:
-                namaPeserta,
-
-            mlid:
-                idML || "-",
-
-            donate:
-                jumlahDonate,
-
-            game:
-                jumlahGame
-
-        };
-
-
-        peserta.push(dataBaru);
-
-        simpanData();
-
-        tampilkanData();
-
-        tutupForm();
-
-    }
-);
-
-
-/* SIMPAN */
-
-function simpanData(){
-
-    localStorage.setItem(
-        "vipPeserta",
-        JSON.stringify(peserta)
-    );
-
-}
-
-
-/* LOAD */
-
-function loadData(){
-
-    const data =
-        localStorage.getItem(
-            "vipPeserta"
-        );
-
-
-    if(data){
-
-        try{
-
-            const hasil =
-                JSON.parse(data);
-
-            if(Array.isArray(hasil)){
-
-                peserta = hasil;
-
-            }
-
-        }catch(error){
-
-            peserta = [];
-
-        }
-
-    }
-
-
-    const hargaTersimpan =
-        localStorage.getItem(
-            "vipHarga"
-        );
-
-
-    if(hargaTersimpan){
-
-        hargaVIP =
-            Number(hargaTersimpan);
-
-        if(
-            Number.isFinite(hargaVIP) &&
-            hargaVIP > 0
-        ){
-
-            hargaInput.value =
-                hargaVIP;
-
-        }
-
-    }
-
-}
-
-
-/* TAMPILKAN */
-
-function tampilkanData(){
-
-    let totalGame = 0;
-
-    let totalDonate = 0;
+    var jumlahGame = 0;
+    var totalDonate = 0;
 
 
     for(
-        let i = 0;
-        i < peserta.length;
+        var i=0;
+        i<peserta.length;
         i++
     ){
 
-        totalGame +=
+        jumlahGame +=
             Number(peserta[i].game) || 0;
 
         totalDonate +=
@@ -866,7 +958,7 @@ function tampilkanData(){
     document.getElementById(
         "jumlahGame"
     ).innerText =
-        totalGame;
+        jumlahGame;
 
 
     document.getElementById(
@@ -875,323 +967,380 @@ function tampilkanData(){
         rupiah(totalDonate);
 
 
+    var daftar =
+        document.getElementById(
+            "daftarPeserta"
+        );
+
+
     if(peserta.length === 0){
 
-        daftarPeserta.innerHTML =
-            '<div class="empty">Belum ada peserta.</div>';
+        daftar.innerHTML =
+            '<div class="empty">' +
+            'Belum ada peserta.' +
+            '</div>';
 
         return;
 
     }
 
 
-    peserta.sort(
-        function(a,b){
-
-            return b.game - a.game;
-
-        }
-    );
-
-
-    let html = "";
+    var html = "";
 
 
     for(
-        let i = 0;
-        i < peserta.length;
+        var i=0;
+        i<peserta.length;
         i++
     ){
 
-        const p =
-            peserta[i];
+        var p = peserta[i];
 
-        const selesai =
-            p.game <= 0;
+        var game =
+            Number(p.game) || 0;
+
+        var selesai =
+            game <= 0;
 
 
-        html += `
+        html +=
+        '<div class="participant ' +
+        (selesai ? "done" : "") +
+        '">' +
 
-        <div class="participant ${selesai ? "done" : ""}">
+            '<div class="participant-top">' +
 
-            <div class="participant-top">
+                '<div>' +
 
-                <div>
+                    '<div class="name">' +
+                        aman(p.nama) +
+                    '</div>' +
 
-                    <div class="name">
-                        ${aman(p.nama)}
-                    </div>
+                    '<div class="ml-id">' +
+                        'ID ML: ' +
+                        aman(p.mlid) +
+                    '</div>' +
 
-                    <div class="ml-id">
-                        ID ML: ${aman(p.mlid)}
-                    </div>
+                    '<div class="donate">' +
+                        'Donate: <strong>' +
+                        rupiah(p.donate) +
+                        '</strong>' +
+                    '</div>' +
 
-                    <div class="donate">
-                        Donate:
-                        <strong>
-                            ${rupiah(p.donate)}
-                        </strong>
-                    </div>
+                '</div>' +
 
-                </div>
+                '<div class="games">' +
 
-                <div class="games">
-
-                    ${
+                    (
                         selesai
 
                         ?
 
-                        '<div class="done-text">✓ SELESAI</div>'
+                        '<div class="done-text">' +
+                        '✓ SELESAI' +
+                        '</div>'
 
                         :
 
-                        `
-                        <div class="game-number">
-                            ${p.game}
-                        </div>
+                        '<div>' +
+                            '<div class="game-number">' +
+                                game +
+                            '</div>' +
 
-                        <div class="game-label">
-                            GAME TERSISA
-                        </div>
-                        `
-                    }
+                            '<div class="game-label">' +
+                                'GAME TERSISA' +
+                            '</div>' +
 
-                </div>
+                        '</div>'
+                    ) +
 
-            </div>
+                '</div>' +
 
+            '</div>' +
 
-            <div class="controls">
+            '<div class="controls">' +
 
-                <button
-                    type="button"
-                    class="control minus"
-                    onclick="kurangiGame(${p.id})"
-                    ${selesai ? "disabled" : ""}
-                >
-                    − 1 GAME
-                </button>
+                '<button ' +
+                    'type="button" ' +
+                    'class="control minus" ' +
+                    'data-action="minus" ' +
+                    'data-id="' + p.id + '"' +
+                    (selesai ? ' disabled' : '') +
+                '>' +
+                    '− 1 GAME' +
+                '</button>' +
 
+                '<button ' +
+                    'type="button" ' +
+                    'class="control plus" ' +
+                    'data-action="plus" ' +
+                    'data-id="' + p.id + '"' +
+                '>' +
+                    '+ 1 GAME' +
+                '</button>' +
 
-                <button
-                    type="button"
-                    class="control plus"
-                    onclick="tambahGame(${p.id})"
-                >
-                    + 1 GAME
-                </button>
+                '<button ' +
+                    'type="button" ' +
+                    'class="control delete" ' +
+                    'data-action="delete" ' +
+                    'data-id="' + p.id + '"' +
+                '>' +
+                    'HAPUS' +
+                '</button>' +
 
+            '</div>' +
 
-                <button
-                    type="button"
-                    class="control delete"
-                    onclick="hapusPeserta(${p.id})"
-                >
-                    HAPUS
-                </button>
-
-            </div>
-
-        </div>
-
-        `;
-
-    }
-
-
-    daftarPeserta.innerHTML =
-        html;
-
-}
-
-
-/* KURANGI GAME */
-
-function kurangiGame(id){
-
-    const p =
-        peserta.find(
-            function(item){
-
-                return item.id === id;
-
-            }
-        );
-
-
-    if(!p) return;
-
-
-    if(p.game > 0){
-
-        p.game--;
+        '</div>';
 
     }
 
 
-    simpanData();
-
-    tampilkanData();
+    daftar.innerHTML = html;
 
 }
 
 
-/* TAMBAH GAME */
+/* ==============================
+   ANTRIAN
+============================== */
 
-function tambahGame(id){
+function getAktif(){
 
-    const p =
-        peserta.find(
-            function(item){
+    var aktif = [];
 
-                return item.id === id;
-
-            }
-        );
-
-
-    if(!p) return;
-
-
-    p.game++;
-
-
-    simpanData();
-
-    tampilkanData();
-
-}
-
-
-/* HAPUS */
-
-function hapusPeserta(id){
-
-    const p =
-        peserta.find(
-            function(item){
-
-                return item.id === id;
-
-            }
-        );
-
-
-    if(!p) return;
-
-
-    if(
-        !confirm(
-            "Hapus peserta " +
-            p.nama +
-            "?"
-        )
+    for(
+        var i=0;
+        i<peserta.length;
+        i++
     ){
+
+        if(
+            Number(peserta[i].game) > 0
+        ){
+
+            aktif.push(
+                peserta[i]
+            );
+
+        }
+
+    }
+
+    return aktif;
+
+}
+
+
+function buatTextAntrian(){
+
+    var aktif = getAktif();
+
+    if(aktif.length === 0){
+        return "";
+    }
+
+    var text =
+        "🎮 ANTRIAN VIP MABAR RHEA\n\n";
+
+    for(
+        var i = 0;
+        i < aktif.length;
+        i++
+    ){
+
+        var p = aktif[i];
+
+        text +=
+            (i + 1) +
+            ". " +
+            p.nama +
+            " | " +
+            p.game +
+            " Game";
+
+        if(i < aktif.length - 1){
+            text += "\n";
+        }
+
+    }
+
+    return text;
+}
+
+
+function tampilkanAntrian(){
+
+    var aktif =
+        getAktif();
+
+
+    document.getElementById(
+        "jumlahAntrian"
+    ).innerText =
+        aktif.length +
+        " pemain";
+
+
+    var preview =
+        document.getElementById(
+            "previewAntrian"
+        );
+
+
+    if(aktif.length === 0){
+
+        preview.innerHTML =
+            '<div class="queue-empty">' +
+            'Belum ada pemain dalam antrian.' +
+            '</div>';
 
         return;
 
     }
 
 
-    peserta =
-        peserta.filter(
-            function(item){
-
-                return item.id !== id;
-
-            }
-        );
-
-
-    simpanData();
-
-    tampilkanData();
+    preview.textContent =
+        buatTextAntrian();
 
 }
 
 
-/* RESET */
+/* ==============================
+   KURANGI GAME
+============================== */
 
-document.getElementById(
-    "resetData"
-).addEventListener(
-    "click",
-    function(){
+function kurangiGame(id){
 
-        if(peserta.length === 0){
-
-            return;
-
-        }
-
+    for(
+        var i=0;
+        i<peserta.length;
+        i++
+    ){
 
         if(
-            !confirm(
-                "Yakin ingin menghapus semua peserta?"
-            )
+            String(peserta[i].id) ===
+            String(id)
         ){
 
-            return;
+            if(
+                Number(peserta[i].game) > 0
+            ){
 
-        }
+                peserta[i].game--;
 
+                if(
+                    peserta[i].game < 0
+                ){
 
-        peserta = [];
-
-        simpanData();
-
-        tampilkanData();
-
-    }
-);
-
-
-/* AMANKAN TEXT */
-
-function aman(text){
-
-    return String(text)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* ENTER */
-
-[nama,mlid,donate].forEach(
-    function(input){
-
-        input.addEventListener(
-            "keydown",
-            function(event){
-
-                if(event.key === "Enter"){
-
-                    tombolSimpan.click();
+                    peserta[i].game = 0;
 
                 }
 
+                simpan();
+
+                tampilkan();
+
+                tampilkanAntrian();
+
             }
-        );
+
+            return;
+
+        }
 
     }
-);
+
+}
 
 
-/* MULAI */
+/* ==============================
+   TAMBAH GAME
+============================== */
 
-loadData();
+function tambahGame(id){
 
-tampilkanData();
+    for(
+        var i=0;
+        i<peserta.length;
+        i++
+    ){
 
-hitungGame();
+        if(
+            String(peserta[i].id) ===
+            String(id)
+        ){
 
-</script>
+            peserta[i].game =
+                Number(peserta[i].game) + 1;
 
-</body>
-</html>
+            simpan();
+
+            tampilkan();
+
+            tampilkanAntrian();
+
+            return;
+
+        }
+
+    }
+
+}
+
+
+/* ==============================
+   HAPUS PESERTA
+============================== */
+
+function hapusPeserta(id){
+
+    var yakin =
+        confirm(
+            "Hapus peserta ini?"
+        );
+
+
+    if(!yakin){
+
+        return;
+
+    }
+
+
+    var hasil = [];
+
+
+    for(
+        var i=0;
+        i<peserta.length;
+        i++
+    ){
+
+        if(
+            String(peserta[i].id) !==
+            String(id)
+        ){
+
+            hasil.push(
+                peserta[i]
+            );
+
+        }
+
+    }
+
+
+    peserta = hasil;
+
+    simpan();
+
+    tampilkan();
+
+    tampilkanAntrian();
+
+}
+
+
+/* ==============================
+   RESET
+==========
